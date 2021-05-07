@@ -6,7 +6,9 @@ function fetchItems(){
 }
 
 function allItems(items) {
+
     const itemsDiv = document.getElementById('itemsContainer')
+    itemsDiv.innerHTML = ""
     for (let item of items) {
        
         //setting up individual div and appending to all items div
@@ -28,30 +30,55 @@ function allItems(items) {
         infoButton.textContent = 'See more info'
         eachItemDiv.appendChild(infoButton)
 
-        infoButton.addEventListener('click', function(e){
+            infoButton.addEventListener('click', function(e){
             e.preventDefault
-            console.log(item)
-            //then this will head to single item function
-
-            singleItem(item)
+    //then this will head to single item function
+            fetchSingleItem(item)
         })
-
     }
 }
 
+function fetchSingleItem(item) {
+    fetch (`http://localhost:3000/items/${item.id}`)
+    .then(resp => resp.json())
+    .then(singleItem)
+}
 
 function singleItem (item){
-    console.log("we are in single item!")
-    //setting up containers
-    let singleItemDiv = document.createElement('div')
-    let itemName = document.createElement('h2')
+    console.log(`we are in single item! ${item.id}`)
+    console.log(`we are in single item! ${item.description}`)
 
-    let itemDescription = item.itemDescription
+
+    const itemsDiv = document.getElementById('itemsContainer')
+    itemsDiv.innerHTML = ""
     
+    const singleItemDiv = document.createElement('div')
+    itemsDiv.appendChild(singleItemDiv)
 
-    console.log(item.description)
+    const itemName = document.createElement('h2')
+    itemName.innerText = item.name
+    singleItemDiv.appendChild(itemName)
 
+    const itemDescription = document.createElement('li')
+    itemDescription.innerText = item.description
+    singleItemDiv.appendChild(itemDescription)
 
+    const itemPrice = document.createElement('li')
+    itemPrice.innerText = `$${item.price}`
+    singleItemDiv.appendChild(itemPrice)
+
+    const addToCartButton = document.createElement("BUTTON");
+    addToCartButton.innerText = "Add to Cart"
+    singleItemDiv.appendChild(addToCartButton)
+
+    const closeButton = document.createElement("BUTTON");
+    closeButton.textContent = "x"
+    singleItemDiv.appendChild(closeButton)
+
+        closeButton.addEventListener('click', function(e){
+            e.preventDefault
+            fetchItems()
+        })
 }
 
 
