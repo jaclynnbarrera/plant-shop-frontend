@@ -14,6 +14,18 @@ function fetchCart(){
     .then(cart)
 }
 
+function createNewCart(){
+    console.log("creating a new cart")
+    const cartDiv = document.getElementById('cartContainer')
+
+    //get icon?
+    const cartIcon = document.createElement("BUTTON");
+    cartIcon.innerText = "Cart"
+    cartDiv.appendChild(cartIcon)
+    //create div
+    //button etc
+}
+
 // const closeButton = getElementById("itemsContainer")
 
 // const cartButton = document.getElementById('add-to-cart')
@@ -22,8 +34,9 @@ function fetchCart(){
 //         console.log("grabbed!! add to cart was clikced")
 //     })
 
-function createNewCart() {
-    console.log("we are in create new cart!")
+function addToCart() {
+    console.log("we are adding to cart!")
+
 
 }
 

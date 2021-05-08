@@ -73,7 +73,7 @@ function singleItem (item){
     
     cartButton.addEventListener('click', function(e){
         e.preventDefault
-        createNewCart()
+        addToCart()
     })
 
     const closeButton = document.createElement("BUTTON");
