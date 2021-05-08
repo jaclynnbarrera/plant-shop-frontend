@@ -9,6 +9,7 @@ function allItems(items) {
 
     const itemsDiv = document.getElementById('itemsContainer')
     itemsDiv.innerHTML = ""
+    
     for (let item of items) {
        
         //setting up individual div and appending to all items div
@@ -45,9 +46,6 @@ function fetchSingleItem(item) {
 }
 
 function singleItem (item){
-    console.log(`we are in single item! ${item.id}`)
-    console.log(`we are in single item! ${item.description}`)
-
 
     const itemsDiv = document.getElementById('itemsContainer')
     itemsDiv.innerHTML = ""
@@ -67,9 +65,16 @@ function singleItem (item){
     itemPrice.innerText = `$${item.price}`
     singleItemDiv.appendChild(itemPrice)
 
-    const addToCartButton = document.createElement("BUTTON");
-    addToCartButton.innerText = "Add to Cart"
-    singleItemDiv.appendChild(addToCartButton)
+    const cartButton = document.createElement("BUTTON");
+    cartButton.setAttribute('id', 'add-to-cart')
+    cartButton.innerText = "Add to Cart"
+    singleItemDiv.appendChild(cartButton)
+
+    
+    cartButton.addEventListener('click', function(e){
+        e.preventDefault
+        createNewCart()
+    })
 
     const closeButton = document.createElement("BUTTON");
     closeButton.textContent = "x"
@@ -78,8 +83,10 @@ function singleItem (item){
         closeButton.addEventListener('click', function(e){
             e.preventDefault
             fetchItems()
-        })
+        })   
 }
+
+
 
 
 
