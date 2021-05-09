@@ -1,6 +1,13 @@
 
 function fetchItems(){
     fetch("http://localhost:3000/items")
+    .then(r => {
+        if (r.ok){
+            return r.json()
+        } else {
+            throw new Error()
+        }
+    })
     .then(resp => resp.json())
     // .then(items => {console.log(items)})
     .then(allItems)

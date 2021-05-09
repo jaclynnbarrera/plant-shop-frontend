@@ -37,12 +37,12 @@ function createNewCart() {
     }
     fetch("http://localhost:3000/carts", options)
     .then(r => r.json())
-    // .then(cart => createCartButton(cart))
-    .then(cart => console.log(cart))
+    .then(cart => createCartButton(cart))
+    // .then(cart => console.log(cart))
 }
  
 //being called in index.js
-function createCartButton(){
+function createCartButton(cart){
     const cartDiv = document.getElementById('cartContainer')
     //get icon?
     const cartIcon = document.createElement("BUTTON")
@@ -51,11 +51,11 @@ function createCartButton(){
     cartDiv.appendChild(cartIcon)
 
     cartIcon.addEventListener('click', function(e){
-        fetchCart()
+        fetchCart(cart)
     })
 }
 
-function fetchCart(){
+function fetchCart(cart){
     //change fetch url to individ cart that has been created
     fetch("http://localhost:3000/carts/1")
     .then(resp => resp.json())
@@ -96,8 +96,6 @@ function renderCart(cart){
         const itemPrice = document.createElement('li')
         itemPrice.innerText = `$${item.price}`
         eachItemDiv.appendChild(itemPrice)
-
-        // allItems(cart.items)
 
         //not in itemsallitems function
         const itemDescription = document.createElement('p')
