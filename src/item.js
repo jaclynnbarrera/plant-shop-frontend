@@ -2,6 +2,7 @@
 function fetchItems(){
     fetch("http://localhost:3000/items")
     .then(resp => resp.json())
+    // .then(items => {console.log(items)})
     .then(allItems)
 }
 
@@ -35,6 +36,8 @@ function allItems(items) {
             e.preventDefault
     //then this will head to single item function
             fetchSingleItem(item)
+
+
         })
     }
 }

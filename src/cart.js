@@ -1,42 +1,133 @@
 
 // class Cart {
 //     constructor({item_count, total_price, id}) {
-//         this.itemCount = item_count;
-//         this.totalPrice = total_price;
+//         this.itemCount = 0;
+//         this.totalPrice = 0;
 //         this.id = id
 //     }
-
 // }
+
+
+// function createNewCart(){
+//     fetch("http://localhost:3000/carts"), {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify ({
+//             item_count: 0,
+//             total_price: 0.00
+//         }),
+//         .then(resp => resp.json())
+//         .then(cart=> {console.log(cart)
+//         })
+//         }
+//     }
+
+//being called in index.js
+function createCartButton(){
+    const cartDiv = document.getElementById('cartContainer')
+    //get icon?
+    const cartIcon = document.createElement("BUTTON")
+    cartIcon.setAttribute('id', 'cart-icon')
+    cartIcon.innerText = "Cart"
+    cartDiv.appendChild(cartIcon)
+
+    cartIcon.addEventListener('click', function(e){
+        //will be appendCartDiv
+        fetchCart()
+    })
+}
 
 function fetchCart(){
     fetch("http://localhost:3000/carts/1")
     .then(resp => resp.json())
-    .then(cart)
-}
+    .then(cart => renderCart(cart))
+} 
 
-function createNewCart(){
-    console.log("creating a new cart")
-    const cartDiv = document.getElementById('cartContainer')
+function renderCart(cart){
 
-    //get icon?
-    const cartIcon = document.createElement("BUTTON");
-    cartIcon.innerText = "Cart"
-    cartDiv.appendChild(cartIcon)
-    //create div
-    //button etc
-}
+    const itemsDiv = document.getElementById('itemsContainer')
+    itemsDiv.innerHTML = ""
+    console.log("let's render the cart")
+    const items = cart.items
+    console.log(items)
 
-// const closeButton = getElementById("itemsContainer")
+    //cart with total items
+    const itemCount = document.createElement('h2')
+    itemCount.innerText = `Cart (${cart.item_count})`
+    itemsDiv.appendChild(itemCount)
 
-// const cartButton = document.getElementById('add-to-cart')
+    const closeButton = document.createElement("BUTTON");
+    closeButton.textContent = "x"
+    itemsDiv.appendChild(closeButton)
+
+        closeButton.addEventListener('click', function(e){
+            e.preventDefault
+            fetchItems()
+        })   
+
+    for (let item of items) {
+        //div for each item for future styling maybe
+        const eachItemDiv = document.createElement('div')
+        itemsDiv.appendChild(eachItemDiv)
+
+       //item name 
+        const itemName = document.createElement('h4')
+        itemName.innerText = item.name
+        eachItemDiv.appendChild(itemName)
+
+        //item descriptiom
+        const itemDescription = document.createElement('p')
+        itemDescription.innerText = item.description
+        eachItemDiv.appendChild(itemDescription)
+
+        //item price
+        const itemPrice = document.createElement('li')
+        itemPrice.innerText = `$${item.price}`
+        eachItemDiv.appendChild(itemPrice)
+
+        const addItemButton = document.createElement("BUTTON");
+        addItemButton.textContent = 'Add'
+        eachItemDiv.appendChild(addItemButton)
+        //add event listener for this functionality
     
-// cartButton.addEventListener('click', function(e){
-//         console.log("grabbed!! add to cart was clikced")
-//     })
+        //button for remove
+        const removeItemButton = document.createElement("BUTTON");
+        removeItemButton.textContent = 'Remove'
+        eachItemDiv.appendChild(removeItemButton)
+        //event listeners for this functionality
+    
+    }    
+
+    const totalPrice = document.createElement('h3')
+    totalPrice.innerText = `Total: $${cart.total_price}`
+    itemsDiv.appendChild(totalPrice)
+
+}
+
+
+// function createNewCart(){
+//     return fetch("http://localhost:3000/carts"), {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: {
+//             item_count: 0,
+//             total_price: 0.00
+//         }
+//         .then(resp => resp.json())
+//         .then(cart=> {console.log(cart)
+//         })
+
+//     }
+
+//     }
 
 function addToCart() {
     console.log("we are adding to cart!")
-
-
 }
 

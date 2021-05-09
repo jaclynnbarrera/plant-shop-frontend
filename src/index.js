@@ -5,32 +5,14 @@
 //     createNewCart()
 // })
 
-//document add event listener on any add to cart click
-
-
-
-
 
 
 
 fetchItems()
+// fetchCart()
 
-createNewCart()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// createNewCart()
+createCartButton();
 
 
 
