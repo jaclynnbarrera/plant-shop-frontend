@@ -25,6 +25,22 @@
 //         }
 //     }
 
+
+function createNewCart() {
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({cart: {item_count: 0, total_price: 0}})
+    }
+    fetch("http://localhost:3000/carts", options)
+    .then(r => r.json())
+    // .then(cart => createCartButton(cart))
+    .then(cart => console.log(cart))
+}
+ 
 //being called in index.js
 function createCartButton(){
     const cartDiv = document.getElementById('cartContainer')
@@ -35,12 +51,12 @@ function createCartButton(){
     cartDiv.appendChild(cartIcon)
 
     cartIcon.addEventListener('click', function(e){
-        //will be appendCartDiv
         fetchCart()
     })
 }
 
 function fetchCart(){
+    //change fetch url to individ cart that has been created
     fetch("http://localhost:3000/carts/1")
     .then(resp => resp.json())
     .then(cart => renderCart(cart))
@@ -50,9 +66,7 @@ function renderCart(cart){
 
     const itemsDiv = document.getElementById('itemsContainer')
     itemsDiv.innerHTML = ""
-    console.log("let's render the cart")
     const items = cart.items
-    console.log(items)
 
     //cart with total items
     const itemCount = document.createElement('h2')
@@ -69,7 +83,7 @@ function renderCart(cart){
         })   
 
     for (let item of items) {
-        //div for each item for future styling maybe
+        // div for each item for future styling maybe
         const eachItemDiv = document.createElement('div')
         itemsDiv.appendChild(eachItemDiv)
 
@@ -78,26 +92,30 @@ function renderCart(cart){
         itemName.innerText = item.name
         eachItemDiv.appendChild(itemName)
 
-        //item descriptiom
-        const itemDescription = document.createElement('p')
-        itemDescription.innerText = item.description
-        eachItemDiv.appendChild(itemDescription)
-
         //item price
         const itemPrice = document.createElement('li')
         itemPrice.innerText = `$${item.price}`
         eachItemDiv.appendChild(itemPrice)
 
+        // allItems(cart.items)
+
+        //not in itemsallitems function
+        const itemDescription = document.createElement('p')
+        itemDescription.innerText = item.description
+        eachItemDiv.appendChild(itemDescription)
+
+        //not in itemsAllItems function
         const addItemButton = document.createElement("BUTTON");
         addItemButton.textContent = 'Add'
         eachItemDiv.appendChild(addItemButton)
         //add event listener for this functionality
     
-        //button for remove
+        //not in itemsallitems function
         const removeItemButton = document.createElement("BUTTON");
         removeItemButton.textContent = 'Remove'
         eachItemDiv.appendChild(removeItemButton)
         //event listeners for this functionality
+
     
     }    
 
@@ -107,27 +125,8 @@ function renderCart(cart){
 
 }
 
-
-// function createNewCart(){
-//     return fetch("http://localhost:3000/carts"), {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: {
-//             item_count: 0,
-//             total_price: 0.00
-//         }
-//         .then(resp => resp.json())
-//         .then(cart=> {console.log(cart)
-//         })
-
-//     }
-
-//     }
-
 function addToCart() {
     console.log("we are adding to cart!")
+
 }
 

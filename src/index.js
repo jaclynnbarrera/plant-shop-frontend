@@ -9,10 +9,9 @@
 
 
 fetchItems()
-// fetchCart()
 
-// createNewCart()
-createCartButton();
+createNewCart()
+// createCartButton();
 
 
 
