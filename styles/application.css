@@ -23,7 +23,18 @@
   padding-left: 30px;
 }
 
+#single-item img {
+  max-width: 20%;
+  max-height: 20%;
+  display: block;
+}
+
 #itemsContainer > * {
+
+  padding-top: 50px;
   padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;
   margin: 30px ;
 }
+

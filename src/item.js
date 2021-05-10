@@ -6,6 +6,7 @@ class Item {
         this.description = item.description
         this.price = item.price
         this.cart_id = item.cart_id
+        this.image_link = item.image_link
     }
 
      renderItem() {
@@ -22,10 +23,13 @@ class Item {
         itemName.innerText = this.name
         eachItemDiv.appendChild(itemName)
     
-   
         const itemPrice = document.createElement('li')
         itemPrice.innerText = `$${this.price}`
         eachItemDiv.appendChild(itemPrice)
+
+        const itemImage = document.createElement('img')
+        itemImage.src = this.image_link
+        eachItemDiv.appendChild(itemImage)
     
         const infoButton = document.createElement("BUTTON");
         infoButton.textContent = 'See more info'

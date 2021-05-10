@@ -125,6 +125,6 @@ fetch(`http://localhost:3000/items/${item.id}`, {
 .then(response => {eachItemDiv.remove()}  )
 .catch((error) => {
   console.error('Error:', error);
-});
+    });
 }
 
