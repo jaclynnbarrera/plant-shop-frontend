@@ -1,12 +1,5 @@
 
-// function fetchItems(){
-//     fetch("http://localhost:3000/items")
-//     .then(r => r.json())
-//     // .then(items => {console.log(items)})
-//     .then(allItems)
-// }
-
-
+//static
 function fetchItems(){
     fetch("http://localhost:3000/items")
     .then(r => {
@@ -21,6 +14,7 @@ function fetchItems(){
     .then(allItems)
 }
 
+//static
 function allItems(items) {
 
     const itemsDiv = document.getElementById('itemsContainer')
@@ -51,12 +45,11 @@ function allItems(items) {
             e.preventDefault
     //then this will head to single item function
             fetchSingleItem(item)
-
-
         })
     }
 }
 
+//class?
 function fetchSingleItem(item) {
     fetch (`http://localhost:3000/items/${item.id}`)
     .then(resp => resp.json())

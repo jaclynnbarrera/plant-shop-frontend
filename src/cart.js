@@ -1,30 +1,4 @@
 
-// class Cart {
-//     constructor({item_count, total_price, id}) {
-//         this.itemCount = 0;
-//         this.totalPrice = 0;
-//         this.id = id
-//     }
-// }
-
-
-// function createNewCart(){
-//     fetch("http://localhost:3000/carts"), {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify ({
-//             item_count: 0,
-//             total_price: 0.00
-//         }),
-//         .then(resp => resp.json())
-//         .then(cart=> {console.log(cart)
-//         })
-//         }
-//     }
-
 class Cart {
 
     constructor(cart){
@@ -32,24 +6,94 @@ class Cart {
         this.totalPrice = cart.total_price
         this.id = cart.id
         this.items = cart.items
-        // debugger
     }
 
     createCartButton(){
         const cartDiv = document.getElementById('cartContainer')
-        //get icon?
         const cartIcon = document.createElement("BUTTON")
-        cartIcon.setAttribute('id', 'cart-icon')
+        cartIcon.setAttribute('id', this.id)
         cartIcon.innerText = "Cart"
         cartDiv.appendChild(cartIcon)
-    
-        cartIcon.addEventListener('click', function(e){
-            fetchCart()
-        })
+        cartIcon.addEventListener("click", this.fetchCart.bind(this));
     }
-}
- 
-//being called in index.js
+
+    fetchCart(){
+        console.log("we are in fetch cart!")
+        fetch(`http://localhost:3000/carts/${this.id}`)
+        .then(resp => resp.json())
+        .then(this.renderCart)
+        // .then(cart => this.renderCart)
+        // .then(cart => renderCart(cart))
+    }
+
+    renderCart(){
+        console.log("in class render cart")
+        debugger
+
+        const itemsDiv = document.getElementById('itemsContainer')
+        itemsDiv.innerHTML = ""
+        const items = cart.items
+    
+        //cart with total items
+        const itemCount = document.createElement('h2')
+        itemCount.innerText = `Cart (${cart.item_count})`
+        itemsDiv.appendChild(itemCount)
+    
+        const closeButton = document.createElement("BUTTON");
+        closeButton.textContent = "x"
+        itemsDiv.appendChild(closeButton)
+    
+            closeButton.addEventListener('click', function(e){
+                e.preventDefault
+                fetchItems()
+            })   
+    
+        for (let item of items) {
+            // div for each item for future styling maybe
+            const eachItemDiv = document.createElement('div')
+            eachItemDiv.id = item.id
+            itemsDiv.appendChild(eachItemDiv)
+    
+           //item name 
+            const itemName = document.createElement('h4')
+            itemName.innerText = item.name
+            eachItemDiv.appendChild(itemName)
+    
+            //item price
+            const itemPrice = document.createElement('li')
+            itemPrice.innerText = `$${item.price}`
+            eachItemDiv.appendChild(itemPrice)
+    
+            //not in itemsallitems function
+            const itemDescription = document.createElement('p')
+            itemDescription.innerText = item.description
+            eachItemDiv.appendChild(itemDescription)
+    
+            //not in itemsAllItems function
+            const addItemButton = document.createElement("BUTTON");
+            addItemButton.textContent = 'Add'
+            eachItemDiv.appendChild(addItemButton)
+            //add event listener for this functionality
+        
+            //not in itemsallitems function
+            const removeItemButton = document.createElement("BUTTON");
+            removeItemButton.textContent = 'Remove'
+            eachItemDiv.appendChild(removeItemButton)
+            removeItemButton.addEventListener('click', function (e) {
+                removeItemFromCart(item, eachItemDiv)
+            })
+    
+        }      //end of for loop  
+    
+        const totalPrice = document.createElement('h3')
+        totalPrice.innerText = `Total: $${cart.total_price}`
+        itemsDiv.appendChild(totalPrice)
+    
+    }//end of renderCart
+
+}//endofcartclass
+
+// being called in index.js
 function createNewCart() {
     const options = {
         method: "POST",
@@ -63,95 +107,25 @@ function createNewCart() {
     .then(r => r.json())
     // .then(cart => {console.log(cart)})
     .then (cart => {
+        console.log(cart)
         let newCart = new Cart(cart)
         newCart.createCartButton()
     })
-    //create cart class THEN cart button
-    // .then(cart => createCartButton(cart))
-}
- 
-// function createCartButton(cart){
-//     const cartDiv = document.getElementById('cartContainer')
-//     //get icon?
-//     const cartIcon = document.createElement("BUTTON")
-//     cartIcon.setAttribute('id', 'cart-icon')
-//     cartIcon.innerText = "Cart"
-//     cartDiv.appendChild(cartIcon)
 
-//     cartIcon.addEventListener('click', function(e){
-//         fetchCart(cart)
-//     })
-// }
-
-function fetchCart(cart){
-    fetch("http://localhost:3000/carts/1")
-    .then(resp => resp.json())
-    .then(cart => renderCart(cart))
-} 
-
-function renderCart(cart){
-
-    const itemsDiv = document.getElementById('itemsContainer')
-    itemsDiv.innerHTML = ""
-    const items = cart.items
-
-    //cart with total items
-    const itemCount = document.createElement('h2')
-    itemCount.innerText = `Cart (${cart.item_count})`
-    itemsDiv.appendChild(itemCount)
-
-    const closeButton = document.createElement("BUTTON");
-    closeButton.textContent = "x"
-    itemsDiv.appendChild(closeButton)
-
-        closeButton.addEventListener('click', function(e){
-            e.preventDefault
-            fetchItems()
-        })   
-
-    for (let item of items) {
-        // div for each item for future styling maybe
-        const eachItemDiv = document.createElement('div')
-        eachItemDiv.id = item.id
-        itemsDiv.appendChild(eachItemDiv)
-
-       //item name 
-        const itemName = document.createElement('h4')
-        itemName.innerText = item.name
-        eachItemDiv.appendChild(itemName)
-
-        //item price
-        const itemPrice = document.createElement('li')
-        itemPrice.innerText = `$${item.price}`
-        eachItemDiv.appendChild(itemPrice)
-
-        //not in itemsallitems function
-        const itemDescription = document.createElement('p')
-        itemDescription.innerText = item.description
-        eachItemDiv.appendChild(itemDescription)
-
-        //not in itemsAllItems function
-        const addItemButton = document.createElement("BUTTON");
-        addItemButton.textContent = 'Add'
-        eachItemDiv.appendChild(addItemButton)
-        //add event listener for this functionality
     
-        //not in itemsallitems function
-        const removeItemButton = document.createElement("BUTTON");
-        removeItemButton.textContent = 'Remove'
-        eachItemDiv.appendChild(removeItemButton)
-        removeItemButton.addEventListener('click', function (e) {
-            removeItemFromCart(item, eachItemDiv)
-        })
-        //event listeners for this functionality
 
-    }    
 
-    const totalPrice = document.createElement('h3')
-    totalPrice.innerText = `Total: $${cart.total_price}`
-    itemsDiv.appendChild(totalPrice)
 
-}
+
+
+
+
+
+
+
+
+}//end of createnewcart
+
 
 //move to item controller
 function removeItemFromCart(item, eachItemDiv) {
