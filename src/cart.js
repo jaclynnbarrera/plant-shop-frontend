@@ -32,9 +32,21 @@ class Cart {
         this.totalPrice = cart.total_price
         this.id = cart.id
         this.items = cart.items
-        debugger
+        // debugger
     }
 
+    createCartButton(){
+        const cartDiv = document.getElementById('cartContainer')
+        //get icon?
+        const cartIcon = document.createElement("BUTTON")
+        cartIcon.setAttribute('id', 'cart-icon')
+        cartIcon.innerText = "Cart"
+        cartDiv.appendChild(cartIcon)
+    
+        cartIcon.addEventListener('click', function(e){
+            fetchCart()
+        })
+    }
 }
  
 //being called in index.js
@@ -52,23 +64,24 @@ function createNewCart() {
     // .then(cart => {console.log(cart)})
     .then (cart => {
         let newCart = new Cart(cart)
+        newCart.createCartButton()
     })
     //create cart class THEN cart button
     // .then(cart => createCartButton(cart))
 }
  
-function createCartButton(cart){
-    const cartDiv = document.getElementById('cartContainer')
-    //get icon?
-    const cartIcon = document.createElement("BUTTON")
-    cartIcon.setAttribute('id', 'cart-icon')
-    cartIcon.innerText = "Cart"
-    cartDiv.appendChild(cartIcon)
+// function createCartButton(cart){
+//     const cartDiv = document.getElementById('cartContainer')
+//     //get icon?
+//     const cartIcon = document.createElement("BUTTON")
+//     cartIcon.setAttribute('id', 'cart-icon')
+//     cartIcon.innerText = "Cart"
+//     cartDiv.appendChild(cartIcon)
 
-    cartIcon.addEventListener('click', function(e){
-        fetchCart(cart)
-    })
-}
+//     cartIcon.addEventListener('click', function(e){
+//         fetchCart(cart)
+//     })
+// }
 
 function fetchCart(cart){
     fetch("http://localhost:3000/carts/1")
