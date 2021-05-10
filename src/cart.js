@@ -91,6 +91,14 @@ class Cart {
     
     }//end of renderCart
 
+    //  updateCart(){
+
+    // }
+    
+    //  addToCart() {
+    //     console.log("we are adding to cart!")
+    
+    // }
 }//endofcartclass
 
 // being called in index.js
@@ -111,23 +119,9 @@ function createNewCart() {
         let newCart = new Cart(cart)
         newCart.createCartButton()
     })
-
-    
-
-
-
-
-
-
-
-
-
-
-
 }//end of createnewcart
 
-
-//move to item controller
+//move to item controller?
 function removeItemFromCart(item, eachItemDiv) {
 
 fetch(`http://localhost:3000/items/${item.id}`, {
@@ -145,13 +139,3 @@ fetch(`http://localhost:3000/items/${item.id}`, {
   console.error('Error:', error);
 });
 }
-
-function updateCart(){
-
-}
-
-function addToCart() {
-    console.log("we are adding to cart!")
-
-}
-

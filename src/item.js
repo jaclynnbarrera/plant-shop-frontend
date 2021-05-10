@@ -24,6 +24,7 @@ function allItems(items) {
        
         //setting up individual div and appending to all items div
         const eachItemDiv = document.createElement('div')
+        eachItemDiv.id = "each-item"
         itemsDiv.appendChild(eachItemDiv)
         
         //setting up item header and appending to individ item div
@@ -62,6 +63,7 @@ function singleItem (item){
     itemsDiv.innerHTML = ""
     
     const singleItemDiv = document.createElement('div')
+    singleItemDiv.id = "single-item"
     itemsDiv.appendChild(singleItemDiv)
 
     const itemName = document.createElement('h2')
