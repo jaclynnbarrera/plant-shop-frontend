@@ -5,6 +5,7 @@ class Item {
         this.name = item.name
         this.description = item.description
         this.price = item.price
+        this.id = item.id
         this.cart_id = item.cart_id
         this.image_link = item.image_link
     }
@@ -72,6 +73,8 @@ class Item {
         cartButton.innerText = "Add to Cart"
         singleItemDiv.appendChild(cartButton)
 
+        cartButton.addEventListener("click", this.updateItemCartId.bind(this))
+
         const closeButton = document.createElement("BUTTON");
         closeButton.textContent = "x"
         singleItemDiv.appendChild(closeButton)
@@ -83,6 +86,25 @@ class Item {
         })  
     }
 
+    updateItemCartId(e){
+        e.preventDefault()
+        console.log("updateing cart id")
+        let cartId = document.getElementById("cartContainer").childNodes[1].id
+        
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({name: this.name, cart_id: cartId})
+        }
+        fetch(`http://localhost:3000/items/${this.id}`, options)
+        .then(r => r.json())
+        .then(r => console.log(r))
+
+    }//endofupdateitem
+
 }//endof class
 
 function fetchItems(){
@@ -92,4 +114,3 @@ function fetchItems(){
         items.map(item => new Item(item).renderItem())
     })
 }
-

@@ -133,3 +133,7 @@ fetch(`http://localhost:3000/items/${item.id}`, {
     });
 }
 
+// function addItemToCart(item){
+//     console.log("we are in add item to cart")
+//     debugger
+// }
