@@ -25,6 +25,18 @@
 //         }
 //     }
 
+class Cart {
+
+    constructor(cart){
+        this.itemCount = cart.item_count
+        this.totalPrice = cart.total_price
+        this.id = cart.id
+        this.items = cart.items
+        debugger
+    }
+
+}
+ 
 //being called in index.js
 function createNewCart() {
     const options = {
@@ -37,7 +49,12 @@ function createNewCart() {
     }
     fetch("http://localhost:3000/carts", options)
     .then(r => r.json())
-    .then(cart => createCartButton(cart))
+    // .then(cart => {console.log(cart)})
+    .then (cart => {
+        let newCart = new Cart(cart)
+    })
+    //create cart class THEN cart button
+    // .then(cart => createCartButton(cart))
 }
  
 function createCartButton(cart){
