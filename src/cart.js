@@ -25,7 +25,7 @@
 //         }
 //     }
 
-
+//being called in index.js
 function createNewCart() {
     const options = {
         method: "POST",
@@ -38,10 +38,8 @@ function createNewCart() {
     fetch("http://localhost:3000/carts", options)
     .then(r => r.json())
     .then(cart => createCartButton(cart))
-    // .then(cart => console.log(cart))
 }
  
-//being called in index.js
 function createCartButton(cart){
     const cartDiv = document.getElementById('cartContainer')
     //get icon?
@@ -56,7 +54,6 @@ function createCartButton(cart){
 }
 
 function fetchCart(cart){
-    //change fetch url to individ cart that has been created
     fetch("http://localhost:3000/carts/1")
     .then(resp => resp.json())
     .then(cart => renderCart(cart))
@@ -85,6 +82,7 @@ function renderCart(cart){
     for (let item of items) {
         // div for each item for future styling maybe
         const eachItemDiv = document.createElement('div')
+        eachItemDiv.id = item.id
         itemsDiv.appendChild(eachItemDiv)
 
        //item name 
@@ -112,14 +110,39 @@ function renderCart(cart){
         const removeItemButton = document.createElement("BUTTON");
         removeItemButton.textContent = 'Remove'
         eachItemDiv.appendChild(removeItemButton)
+        removeItemButton.addEventListener('click', function (e) {
+            removeItemFromCart(item, eachItemDiv)
+        })
         //event listeners for this functionality
 
-    
     }    
 
     const totalPrice = document.createElement('h3')
     totalPrice.innerText = `Total: $${cart.total_price}`
     itemsDiv.appendChild(totalPrice)
+
+}
+
+//move to item controller
+function removeItemFromCart(item, eachItemDiv) {
+
+fetch(`http://localhost:3000/items/${item.id}`, {
+  method: 'PATCH', 
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ id: item.id, name: item.name, description: item.description, price: item.price, cart_id: 2}
+    ),
+})
+.then(response => response.json())
+// .then(response => console.log(response))
+.then(response => {eachItemDiv.remove()}  )
+.catch((error) => {
+  console.error('Error:', error);
+});
+}
+
+function updateCart(){
 
 }
 

@@ -1,4 +1,12 @@
 
+// function fetchItems(){
+//     fetch("http://localhost:3000/items")
+//     .then(r => r.json())
+//     // .then(items => {console.log(items)})
+//     .then(allItems)
+// }
+
+
 function fetchItems(){
     fetch("http://localhost:3000/items")
     .then(r => {
@@ -8,7 +16,7 @@ function fetchItems(){
             throw new Error()
         }
     })
-    .then(resp => resp.json())
+    // .then(r => r.json())
     // .then(items => {console.log(items)})
     .then(allItems)
 }
@@ -39,7 +47,7 @@ function allItems(items) {
         infoButton.textContent = 'See more info'
         eachItemDiv.appendChild(infoButton)
 
-            infoButton.addEventListener('click', function(e){
+            infoButton.addEventListener('click', function(e){      
             e.preventDefault
     //then this will head to single item function
             fetchSingleItem(item)
