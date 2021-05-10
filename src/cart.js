@@ -40,9 +40,7 @@ class Cart {
         closeButton.textContent = "x"
         itemsDiv.appendChild(closeButton)
 
-        closeButton.addEventListener('click', function(e){
-            e.preventDefault()
-            Item.fetchItems()})
+        closeButton.addEventListener('click', this.clearCart.bind(this))
   
         for (let item of items) {
             // div for each item for future styling maybe
@@ -86,6 +84,13 @@ class Cart {
         itemsDiv.appendChild(totalPrice)
     
     }//end of renderCart
+
+    clearCart(){
+        console.log("we are in clear cart")
+        document.getElementById("itemsContainer").innerHTML = ""
+        console.log("we cleared the cart")
+        fetchItems()
+    }
 
 }//endofcartclass
 
