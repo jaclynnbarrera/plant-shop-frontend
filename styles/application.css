@@ -13,7 +13,7 @@
   box-shadow: 5px 10px;
 }
 
-#single-item {
+#single-item, #single-item-individ {
   display: inline-block;
   background-color: white;
   border: 3px solid black;
@@ -21,12 +21,21 @@
   padding-right: 30px;
   padding-bottom: 50px;
   padding-left: 30px;
+  max-width: 20%
 }
 
 #single-item img {
-  max-width: 20%;
-  max-height: 20%;
+  max-width: 40%;
+  max-height: 40%;
   display: block;
+  padding-bottom: 20px;
+}
+
+#single-item-individ img {
+  max-width: 40%;
+  max-height: 40%;
+  display: block;
+  padding-bottom: 20px;
 }
 
 #itemsContainer > * {
