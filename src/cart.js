@@ -21,33 +21,29 @@ class Cart {
         console.log("we are in fetch cart!")
         fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
-        .then(this.renderCart)
-        // .then(cart => this.renderCart)
-        // .then(cart => renderCart(cart))
+        .then(this.renderCart())
     }
 
     renderCart(){
         console.log("in class render cart")
-        debugger
 
         const itemsDiv = document.getElementById('itemsContainer')
         itemsDiv.innerHTML = ""
-        const items = cart.items
+        const items = this.items
     
         //cart with total items
         const itemCount = document.createElement('h2')
-        itemCount.innerText = `Cart (${cart.item_count})`
+        itemCount.innerText = `Cart (${this.item_count})`
         itemsDiv.appendChild(itemCount)
     
         const closeButton = document.createElement("BUTTON");
         closeButton.textContent = "x"
         itemsDiv.appendChild(closeButton)
-    
-            closeButton.addEventListener('click', function(e){
-                e.preventDefault
-                fetchItems()
-            })   
-    
+
+        closeButton.addEventListener('click', function(e){
+            e.preventDefault()
+            Item.fetchItems()})
+  
         for (let item of items) {
             // div for each item for future styling maybe
             const eachItemDiv = document.createElement('div')
@@ -86,19 +82,11 @@ class Cart {
         }      //end of for loop  
     
         const totalPrice = document.createElement('h3')
-        totalPrice.innerText = `Total: $${cart.total_price}`
+        totalPrice.innerText = `Total: $${this.total_price}`
         itemsDiv.appendChild(totalPrice)
     
     }//end of renderCart
 
-    //  updateCart(){
-
-    // }
-    
-    //  addToCart() {
-    //     console.log("we are adding to cart!")
-    
-    // }
 }//endofcartclass
 
 // being called in index.js
@@ -129,7 +117,7 @@ fetch(`http://localhost:3000/items/${item.id}`, {
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ id: item.id, name: item.name, description: item.description, price: item.price, cart_id: 2}
+  body: JSON.stringify({ id: item.id, name: item.name, description: item.description, price: item.price, cart_id: 1}
     ),
 })
 .then(response => response.json())
@@ -139,3 +127,4 @@ fetch(`http://localhost:3000/items/${item.id}`, {
   console.error('Error:', error);
 });
 }
+
