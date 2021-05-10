@@ -10,40 +10,34 @@ class Item {
 
      renderItem() {
         console.log("we are in renderItem")
-        debugger
 
         const itemsDiv = document.getElementById('itemsContainer')
-        itemsDiv.innerHTML = ""
-        
-        // for (let item of items) {
-           
-        //     //setting up individual div and appending to all items div
-        //     const eachItemDiv = document.createElement('div')
-        //     eachItemDiv.id = "each-item"
-        //     itemsDiv.appendChild(eachItemDiv)
-            
-        //     //setting up item header and appending to individ item div
-        //     const itemName = document.createElement('h4')
-        //     itemName.innerText = item.name
-        //     eachItemDiv.appendChild(itemName)
-    
-        //     //price
-        //     const itemPrice = document.createElement('li')
-        //     itemPrice.innerText = `$${item.price}`
-        //     eachItemDiv.appendChild(itemPrice)
-    
-        //     //button
-        //     const infoButton = document.createElement("BUTTON");
-        //     infoButton.textContent = 'See more info'
-        //     eachItemDiv.appendChild(infoButton)
-        //     infoButton.addEventListener("click", item.fetchSingleItem.bind(item))
-    
-        //         infoButton.addEventListener('click', function(e){      
-        //         e.preventDefault()
+     
+        //setting up individual div and appending to all items div
+        const eachItemDiv = document.createElement('div')
+        eachItemDiv.id = "single-item"
+        itemsDiv.appendChild(eachItemDiv)
 
-        // //then this will head to single item function
-        //         item.fetchSingleItem.bind(item)})
-        // }//end of loop
+        const itemName = document.createElement('h4')
+        itemName.innerText = this.name
+        eachItemDiv.appendChild(itemName)
+    
+   
+        const itemPrice = document.createElement('li')
+        itemPrice.innerText = `$${this.price}`
+        eachItemDiv.appendChild(itemPrice)
+    
+        const infoButton = document.createElement("BUTTON");
+        infoButton.textContent = 'See more info'
+        eachItemDiv.appendChild(infoButton)
+        // infoButton.addEventListener("click", item.fetchSingleItem.bind(item))
+    
+        // infoButton.addEventListener('click', function(e){      
+        // e.preventDefault()
+
+        // // //then this will head to single item function
+        // //         item.fetchSingleItem.bind(item)})
+
     }
 
     fetchSingleItem(e) {
@@ -57,13 +51,10 @@ class Item {
 
 
     singleItem (){
-        console.log("we are in single item")
 
         const itemsDiv = document.getElementById('itemsContainer')
-        itemsDiv.innerHTML = ""
         
         const singleItemDiv = document.createElement('div')
-        singleItemDiv.id = "single-item"
         itemsDiv.appendChild(singleItemDiv)
     
         const itemName = document.createElement('h2')
