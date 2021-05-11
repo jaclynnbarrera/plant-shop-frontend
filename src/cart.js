@@ -1,3 +1,4 @@
+let newCart
 
 class Cart {
 
@@ -12,6 +13,7 @@ class Cart {
         const cartDiv = document.getElementById('cartContainer')
         const cartIcon = document.createElement("BUTTON")
         cartIcon.setAttribute('id', this.id)
+        cartIcon.setAttribute('class', 'cart-button')
         cartIcon.innerText = "Cart"
         cartDiv.appendChild(cartIcon)
         cartIcon.addEventListener("click", this.fetchCart.bind(this));
@@ -22,7 +24,7 @@ class Cart {
         .then(resp => resp.json())
         .then(resp => {
             const itemsss = resp.items
-            Cart.refreshCart(itemsss)
+            this.refreshCart(itemsss)
         })
     }
 
@@ -36,7 +38,7 @@ class Cart {
         })
     }
 
-    static refreshCart(items){
+    refreshCart(items){
         const totalPrice = []
 
         const itemsDiv = document.getElementById('itemsContainer')
@@ -90,12 +92,12 @@ class Cart {
                     let itemId = item.id
                     // console.log(item)
                     // console.log(cartId)
-                    Cart.removeItemFromCart(itemId, cartId)
+                    this.removeItemFromCart(itemId)
                 })
          }//end offorloop
     }//endofRefreshCart
 
-    static removeItemFromCart(itemId, cartId){ 
+    removeItemFromCart(itemId){ 
         const options = {
             method: "PATCH",
             headers: {
@@ -106,26 +108,33 @@ class Cart {
         }
         fetch(`http://localhost:3000/items/${itemId}`, options)
         .then(r => r.json())
-        .then(Cart.updateCart(cartId))
+        .then(r => this.updateCart())
 
     }
+
+    updateItemCartId(itemId){
+        let cartId = document.getElementById("cartContainer").childNodes[1].id
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({cart_id: cartId})
+        }
+        fetch(`http://localhost:3000/items/${itemId}`, options)
+        .then(r => r.json())
+        .then(r => this.updateCart())
+    }//
 }//endofcartclass
 
 // being called in index.js
 function createNewCart() {
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({cart: {item_count: 0, total_price: 0}})
-    }
-    fetch("http://localhost:3000/carts", options)
+    return fetch("http://localhost:3000/carts/2")
     .then(r => r.json())
-    .then (cart => {
+    .then(cart => {
         console.log(cart)
-        let newCart = new Cart(cart)
+        newCart = new Cart(cart)
         newCart.createCartButton()
     })
 }//end of createnewcart
@@ -147,3 +156,4 @@ fetch(`http://localhost:3000/items/${item.id}`, {
   console.error('Error:', error);
     });
 }
+

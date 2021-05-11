@@ -42,9 +42,6 @@ class Item {
 
     renderSingleItem(e){
         e.preventDefault()
-
-        "we are in single intem render"
-
         const itemsDiv = document.getElementById('itemsContainer')
         itemsDiv.innerHTML = ""
         
@@ -73,7 +70,7 @@ class Item {
         cartButton.innerText = "Add to Cart"
         singleItemDiv.appendChild(cartButton)
 
-        cartButton.addEventListener("click", this.updateItemCartId.bind(this))
+        cartButton.addEventListener("click", () => newCart.updateItemCartId.call(this))
 
         const closeButton = document.createElement("BUTTON");
         closeButton.textContent = "x"
@@ -85,27 +82,7 @@ class Item {
             fetchItems()
         })  
     }
-
-    updateItemCartId(e){
-        e.preventDefault()
-        let cartId = document.getElementById("cartContainer").childNodes[1].id
-        
-        const options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({name: this.name, cart_id: cartId})
-        }
-        fetch(`http://localhost:3000/items/${this.id}`, options)
-        .then(r => r.json())
-        .then(Cart.updateCart(cartId))
-    }//endofupdateitem
-
-
-
-}//endof class
+}
 
 function fetchItems(){
     fetch("http://localhost:3000/items")
@@ -115,8 +92,3 @@ function fetchItems(){
     })
 }
 
-
-
-// console.log(
-//     [].reduce((a, b) => a + b, 0)
-//   )

@@ -13,6 +13,15 @@
   box-shadow: 5px 10px;
 }
 
+.cart-button {
+  float: right;
+  margin-top: 40px;
+  margin-right: 200px;
+  position: absolute;
+  top: 00;
+  right: 00;
+}
+
 #single-item, #single-item-individ {
   display: inline-block;
   background-color: white;
@@ -27,10 +36,12 @@
 
 #single-item:hover {
   background-color: #8FBC8F;
+  box-shadow: 5px 10px;
 }
 
 #single-item-individ:hover {
   background-color: #8FBC8F;
+  box-shadow: 5px 10px;
 }
 
 #single-item img {

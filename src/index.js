@@ -2,12 +2,3 @@
 fetchItems()
 
 createNewCart()
-
-
-
-
-
-
-
-
-
