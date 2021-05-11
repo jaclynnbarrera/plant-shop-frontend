@@ -20,7 +20,10 @@ class Cart {
     fetchCart(){
         fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
-        .then(this.renderCart())
+        .then(resp => {
+            const itemsss = resp.items
+            Cart.refreshCart(itemsss)
+        })
     }
 
     static updateCart(cartId){
@@ -77,82 +80,15 @@ class Cart {
             removeItemButton.textContent = "Remove"
             eachItemDiv.appendChild(removeItemButton)
 
-            // eachItemDiv.appendChild(removeItemButton)
-            // removeItemButton.addEventListener('click', function (e) {
-            // removeItemFromCart(item, eachItemDiv)
-                    // })//endofeventloop
-            
-         }//endofforloop
+                removeItemButton.addEventListener("click", function(e){
+                    e.preventDefault()
+                    eachItemDiv.innerHTML = ""
+                    console.log("done")
+                })
+         }//end offorloop
+        
     }//endofRefreshCart
 
-
-
-    // renderCart(){
-
-    //     const itemsDiv = document.getElementById('itemsContainer')
-    //     itemsDiv.innerHTML = ""
-    //     const items = this.items
-    
-    //     //cart with total items
-    //     const itemCount = document.createElement('h2')
-    //     itemCount.innerText = `Cart (${this.item_count})`
-    //     itemsDiv.appendChild(itemCount)
-    
-    //     const closeButton = document.createElement("BUTTON");
-    //     closeButton.textContent = "x"
-    //     itemsDiv.appendChild(closeButton)
-
-    //     closeButton.addEventListener('click', this.clearCart.bind(this))
-  
-    //     for (let item of items) {
-    //         // div for each item for future styling maybe
-    //         const eachItemDiv = document.createElement('div')
-    //         eachItemDiv.id = item.id
-    //         itemsDiv.appendChild(eachItemDiv)
-    
-    //        //item name 
-    //         const itemName = document.createElement('h4')
-    //         itemName.innerText = item.name
-    //         eachItemDiv.appendChild(itemName)
-    
-    //         //item price
-    //         const itemPrice = document.createElement('li')
-    //         itemPrice.innerText = `$${item.price}`
-    //         eachItemDiv.appendChild(itemPrice)
-    
-    //         //not in itemsallitems function
-    //         const itemDescription = document.createElement('p')
-    //         itemDescription.innerText = item.description
-    //         eachItemDiv.appendChild(itemDescription)
-    
-    //         //not in itemsAllItems function
-    //         const addItemButton = document.createElement("BUTTON");
-    //         addItemButton.textContent = 'Add'
-    //         eachItemDiv.appendChild(addItemButton)
-    //         //add event listener for this functionality
-        
-    //         //not in itemsallitems function
-    //         const removeItemButton = document.createElement("BUTTON");
-    //         removeItemButton.textContent = 'Remove'
-    //         eachItemDiv.appendChild(removeItemButton)
-    //         removeItemButton.addEventListener('click', function (e) {
-    //             removeItemFromCart(item, eachItemDiv)
-    //         })
-    
-    //     }      //end of for loop  
-    
-    //     const totalPrice = document.createElement('h3')
-    //     totalPrice.innerText = `Total: $${this.total_price}`
-    //     itemsDiv.appendChild(totalPrice)
-    
-    // }//end of renderCart
-
-    clearCart(){
-        console.log("we are in clear cart")
-        document.getElementById("itemsContainer").innerHTML = ""
-        console.log("we cleared the cart")
-        fetchItems()
-    }
 
 }//endofcartclass
 

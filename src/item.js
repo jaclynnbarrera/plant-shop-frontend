@@ -102,6 +102,9 @@ class Item {
         .then(r => r.json())
         .then(Cart.updateCart(cartId))
     }//endofupdateitem
+
+
+
 }//endof class
 
 function fetchItems(){
