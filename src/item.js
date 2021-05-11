@@ -82,13 +82,22 @@ class Item {
             fetchItems()
         })  
     }
-}
 
-function fetchItems(){
-    fetch("http://localhost:3000/items")
-    .then (r => r.json())
-    .then(items => {
-        items.map(item => new Item(item).renderItem())
-    })
-}
+    static fetchItems(){
+        fetch("http://localhost:3000/items")
+        .then (r => r.json())
+        .then(items => {
+            items.map(item => new Item(item).renderItem())
+        })
+    }
+    
+} //end of class
+
+// function fetchItems(){
+//     fetch("http://localhost:3000/items")
+//     .then (r => r.json())
+//     .then(items => {
+//         items.map(item => new Item(item).renderItem())
+//     })
+// }
 
