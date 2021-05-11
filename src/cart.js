@@ -126,18 +126,28 @@ class Cart {
         .then(r => r.json())
         .then(r => this.updateCart())
     }//
+
+    static createNewCart() {
+        return fetch("http://localhost:3000/carts/2")
+        .then(r => r.json())
+        .then(cart => {
+            console.log(cart)
+            newCart = new Cart(cart)
+            newCart.createCartButton()
+        })
+    }
 }//endofcartclass
 
-// being called in index.js
-function createNewCart() {
-    return fetch("http://localhost:3000/carts/2")
-    .then(r => r.json())
-    .then(cart => {
-        console.log(cart)
-        newCart = new Cart(cart)
-        newCart.createCartButton()
-    })
-}//end of createnewcart
+// // being called in index.js
+// function createNewCart() {
+//     return fetch("http://localhost:3000/carts/2")
+//     .then(r => r.json())
+//     .then(cart => {
+//         console.log(cart)
+//         newCart = new Cart(cart)
+//         newCart.createCartButton()
+//     })
+// }//end of createnewcart
 
 function removeItemFromCart(item, eachItemDiv) {
 
@@ -156,4 +166,3 @@ fetch(`http://localhost:3000/items/${item.id}`, {
   console.error('Error:', error);
     });
 }
-

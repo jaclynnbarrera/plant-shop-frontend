@@ -1,4 +1,4 @@
 
 fetchItems()
 
-createNewCart()
+Cart.createNewCart()
