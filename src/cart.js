@@ -37,7 +37,6 @@ class Cart {
     }
 
     static refreshCart(items){
-
         const totalPrice = []
 
         const itemsDiv = document.getElementById('itemsContainer')
@@ -87,17 +86,29 @@ class Cart {
                 removeItemButton.addEventListener("click", function(e){
                     e.preventDefault()
                     eachItemDiv.innerHTML = ""
-                    console.log("done")
+                    let cartId = items[0].cart_id
+                    let itemId = item.id
+                    // console.log(item)
+                    // console.log(cartId)
+                    Cart.removeItemFromCart(itemId, cartId)
                 })
          }//end offorloop
-
-        // const totalPriceDisplay = document.createElement("h3");
-        // totalPriceDisplay.innerHTML = `Total: $${totalPrice.reduce((a,b) => a + b, 0)}`
-        // cart.appendChild(totalPriceDisplay)
-        
     }//endofRefreshCart
 
+    static removeItemFromCart(itemId, cartId){ 
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({cart_id: 1})
+        }
+        fetch(`http://localhost:3000/items/${itemId}`, options)
+        .then(r => r.json())
+        .then(Cart.updateCart(cartId))
 
+    }
 }//endofcartclass
 
 // being called in index.js
@@ -112,7 +123,6 @@ function createNewCart() {
     }
     fetch("http://localhost:3000/carts", options)
     .then(r => r.json())
-    // .then(cart => {console.log(cart)})
     .then (cart => {
         console.log(cart)
         let newCart = new Cart(cart)
