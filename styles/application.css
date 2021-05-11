@@ -39,7 +39,6 @@
 }
 
 #itemsContainer > * {
-
   padding-top: 50px;
   padding-right: 30px;
   padding-bottom: 50px;
@@ -47,3 +46,7 @@
   margin: 30px ;
 }
 
+#cart-div {
+  background-color: white;
+  border: 3px solid black;
+}

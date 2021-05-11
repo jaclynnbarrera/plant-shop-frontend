@@ -88,7 +88,6 @@ class Item {
 
     updateItemCartId(e){
         e.preventDefault()
-        console.log("updateing cart id")
         let cartId = document.getElementById("cartContainer").childNodes[1].id
         
         const options = {
@@ -101,10 +100,8 @@ class Item {
         }
         fetch(`http://localhost:3000/items/${this.id}`, options)
         .then(r => r.json())
-        .then(r => console.log(r))
-
+        .then(Cart.updateCart(cartId))
     }//endofupdateitem
-
 }//endof class
 
 function fetchItems(){
@@ -114,3 +111,4 @@ function fetchItems(){
         items.map(item => new Item(item).renderItem())
     })
 }
+
