@@ -37,6 +37,9 @@ class Cart {
     }
 
     static refreshCart(items){
+
+        const totalPrice = []
+
         const itemsDiv = document.getElementById('itemsContainer')
         itemsDiv.innerHTML = ""
 
@@ -69,6 +72,7 @@ class Cart {
             eachItemDiv.appendChild(itemName)
             
             const itemPrice = document.createElement('li')
+            totalPrice.push(item.price)
             itemPrice.innerText = `$${item.price}`
             eachItemDiv.appendChild(itemPrice)
             
@@ -86,6 +90,10 @@ class Cart {
                     console.log("done")
                 })
          }//end offorloop
+
+        // const totalPriceDisplay = document.createElement("h3");
+        // totalPriceDisplay.innerHTML = `Total: $${totalPrice.reduce((a,b) => a + b, 0)}`
+        // cart.appendChild(totalPriceDisplay)
         
     }//endofRefreshCart
 
