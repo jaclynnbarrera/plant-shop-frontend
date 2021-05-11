@@ -85,8 +85,8 @@ class Cart {
          }//endof loop
 
          const totalPrice = document.createElement('h2')
-         totalPrice.innerText = "Total: "
-         itemsDiv.appendChild(totalPrice)
+         totalPrice.innerText = `Total: $${totalPriceArr.reduce((a,b) => a + b, 0)}.00 `
+         cart.appendChild(totalPrice)
     }//end of render cart
 
     addItemToCart(){
