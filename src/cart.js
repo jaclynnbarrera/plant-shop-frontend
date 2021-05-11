@@ -20,28 +20,16 @@ class Cart {
     }
 
     fetchCart(){
-        debugger
+        this
         fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
-        .then(resp => {
-            const itemsss = resp.items
-            this.refreshCart(itemsss)
-        })
+        .then(resp => this.renderCart())
     }
 
-    static updateCart(cartId){
-        console.log("we are in update cart!")
-        fetch(`http://localhost:3000/carts/${cartId}`)
-        .then(resp => resp.json())
-        .then(resp => {
-            let items = resp.items
-            Cart.refreshCart(items)
-        })
-    }
+    renderCart(){
 
-    refreshCart(items){
-        const totalPrice = []
-
+        let totalPriceArr = []
+    
         const itemsDiv = document.getElementById('itemsContainer')
         itemsDiv.innerHTML = ""
 
@@ -50,7 +38,7 @@ class Cart {
         itemsDiv.appendChild(cart)
 
         const itemCount = document.createElement('h2')
-        itemCount.innerText = `Cart (${items.length})`
+        itemCount.innerText = `Cart (${this.items.length})`
         cart.appendChild(itemCount)
 
         const closeButton = document.createElement("BUTTON");
@@ -63,7 +51,7 @@ class Cart {
             fetchItems()
         })
 
-        for (let item of items) {
+        for (let item of this.items) {
 
             const eachItemDiv = document.createElement('div')
             eachItemDiv.id = item.id
@@ -74,7 +62,8 @@ class Cart {
             eachItemDiv.appendChild(itemName)
             
             const itemPrice = document.createElement('li')
-            totalPrice.push(item.price)
+            //grabbing each price to get sum
+            totalPriceArr.push(item.price)
             itemPrice.innerText = `$${item.price}`
             eachItemDiv.appendChild(itemPrice)
             
@@ -86,30 +75,19 @@ class Cart {
             removeItemButton.textContent = "Remove"
             eachItemDiv.appendChild(removeItemButton)
 
-                removeItemButton.addEventListener("click", function(e){
-                    e.preventDefault()
-                    eachItemDiv.innerHTML = ""
-                    let cartId = items[0].cart_id
-                    let itemId = item.id
-                    this.removeItemFromCart(itemId)
-                })
-         }
-    }
+                // removeItemButton.addEventListener("click", function(e){
+                //     e.preventDefault()
+                //     eachItemDiv.innerHTML = ""
+                //     let cartId = items[0].cart_id
+                //     let itemId = item.id
+                //     this.removeItemFromCart(itemId)
+                // })//endofeventlistener
+         }//endof loop
 
-    removeItemFromCart(itemId){ 
-        const options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({cart_id: 1})
-        }
-        fetch(`http://localhost:3000/items/${itemId}`, options)
-        .then(r => r.json())
-        // .then(r => fetchCart() )
-
-    }
+         const totalPrice = document.createElement('h2')
+         totalPrice.innerText = "Total: "
+         itemsDiv.appendChild(totalPrice)
+    }//end of render cart
 
     addItemToCart(){
         const options = {
