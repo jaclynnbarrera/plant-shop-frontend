@@ -70,34 +70,26 @@ class Item {
         cartButton.innerText = "Add to Cart"
         singleItemDiv.appendChild(cartButton)
 
-        cartButton.addEventListener("click", () => newCart.updateItemCartId.call(this))
+        cartButton.addEventListener("click", () => newCart.addItemToCart.call(this))
 
         const closeButton = document.createElement("BUTTON");
         closeButton.textContent = "x"
         singleItemDiv.appendChild(closeButton)
     
         closeButton.addEventListener('click', function(e){
-            e.preventDefault
+            e.preventDefault()
             itemsDiv.innerHTML = ""
             fetchItems()
-        })  
-    }
-
-    static fetchItems(){
-        fetch("http://localhost:3000/items")
-        .then (r => r.json())
-        .then(items => {
-            items.map(item => new Item(item).renderItem())
         })
+        
     }
-    
-} //end of class
+}
 
-// function fetchItems(){
-//     fetch("http://localhost:3000/items")
-//     .then (r => r.json())
-//     .then(items => {
-//         items.map(item => new Item(item).renderItem())
-//     })
-// }
-
+//set up API class?
+function fetchItems(){
+    fetch("http://localhost:3000/items")
+    .then (r => r.json())
+    .then(items => {
+        items.map(item => new Item(item).renderItem())
+    })
+}

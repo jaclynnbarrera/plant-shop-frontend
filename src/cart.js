@@ -20,6 +20,7 @@ class Cart {
     }
 
     fetchCart(){
+        debugger
         fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
         .then(resp => {
@@ -90,12 +91,10 @@ class Cart {
                     eachItemDiv.innerHTML = ""
                     let cartId = items[0].cart_id
                     let itemId = item.id
-                    // console.log(item)
-                    // console.log(cartId)
                     this.removeItemFromCart(itemId)
                 })
-         }//end offorloop
-    }//endofRefreshCart
+         }
+    }
 
     removeItemFromCart(itemId){ 
         const options = {
@@ -108,50 +107,33 @@ class Cart {
         }
         fetch(`http://localhost:3000/items/${itemId}`, options)
         .then(r => r.json())
-        .then(r => this.updateCart())
+        // .then(r => fetchCart() )
 
     }
 
-    updateItemCartId(itemId){
-        let cartId = document.getElementById("cartContainer").childNodes[1].id
+    addItemToCart(){
         const options = {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
-            body: JSON.stringify({cart_id: cartId})
+            body: JSON.stringify({cart_id: newCart.id})
         }
-        fetch(`http://localhost:3000/items/${itemId}`, options)
+        fetch(`http://localhost:3000/items/${this.id}`, options)
         .then(r => r.json())
-        .then(r => this.updateCart())
+        .then(r => {console.log(r)})
+        .then(r => {
+            newCart.fetchCart()
+        })
     }//
 
     static createNewCart() {
         return fetch("http://localhost:3000/carts/2")
         .then(r => r.json())
         .then(cart => {
-            console.log(cart)
             newCart = new Cart(cart)
             newCart.createCartButton()
         })
     }
 }//endofcartclass
-
-function removeItemFromCart(item, eachItemDiv) {
-
-fetch(`http://localhost:3000/items/${item.id}`, {
-  method: 'PATCH', 
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ id: item.id, name: item.name, description: item.description, price: item.price, cart_id: 1}
-    ),
-})
-.then(response => response.json())
-// .then(response => console.log(response))
-.then(response => {eachItemDiv.remove()}  )
-.catch((error) => {
-  console.error('Error:', error);
-    });
-}
