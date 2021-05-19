@@ -23,7 +23,7 @@ class Item {
         itemName.innerText = this.name
         eachItemDiv.appendChild(itemName)
     
-        const itemPrice = document.createElement('li')
+        const itemPrice = document.createElement('p')
         itemPrice.innerText = `$${this.price}`
         eachItemDiv.appendChild(itemPrice)
 
@@ -51,17 +51,22 @@ class Item {
         itemName.innerText = this.name
         singleItemDiv.appendChild(itemName)
     
-        const itemDescription = document.createElement('li')
+        const itemDescription = document.createElement('p')
         itemDescription.innerText = this.description
         singleItemDiv.appendChild(itemDescription)
     
-        const itemPrice = document.createElement('li')
+        const itemPrice = document.createElement('p')
         itemPrice.innerText = `$${this.price}`
         singleItemDiv.appendChild(itemPrice)
 
         const itemImage = document.createElement('img')
         itemImage.src = this.image_link
         singleItemDiv.appendChild(itemImage)
+
+        const itemCare = document.createElement('p')
+        itemCare.innerText = "Plant Care:"
+        //pull from item attribute and do a for loop
+        singleItemDiv.appendChild(itemCare)
     
         const cartButton = document.createElement("BUTTON");
         cartButton.setAttribute('id', 'add-to-cart')
@@ -88,6 +93,7 @@ function fetchItems(){
     fetch("http://localhost:3000/items")
     .then (r => r.json())
     .then(items => {
-        items.map(item => new Item(item).renderItem())
-    })
+            items.map(item => new Item(item).renderItem())
+    }).catch((err => alert(err)))
 }
+

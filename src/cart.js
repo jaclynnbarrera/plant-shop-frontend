@@ -24,7 +24,7 @@ class Cart {
     fetchCart(){
         return fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
-        .then(resp => this.renderCart())
+        .then(resp => this.renderCart(resp))
     }
 
     renderCart(){
@@ -61,16 +61,16 @@ class Cart {
             const itemName = document.createElement('h4')
             itemName.innerText = item.name
             eachItemDiv.appendChild(itemName)
+
+            const itemImage = document.createElement('img')
+            itemImage.src = item.image_link
+            eachItemDiv.appendChild(itemImage)
             
-            const itemPrice = document.createElement('li')
+            const itemPrice = document.createElement('p')
             //grabbing each price to get sum
             totalPriceArr.push(item.price)
             itemPrice.innerText = `$${item.price}`
             eachItemDiv.appendChild(itemPrice)
-            
-            const itemDescription = document.createElement('p')
-            itemDescription.innerText = item.description
-            eachItemDiv.appendChild(itemDescription)
 
             const removeItemButton = document.createElement("BUTTON");
             removeItemButton.textContent = "Remove"
