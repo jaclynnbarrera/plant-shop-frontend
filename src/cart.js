@@ -11,13 +11,12 @@ class Cart {
 
     createCartButton(){
         const cartDiv = document.getElementById('cartContainer')
-        // const cartIcon = document.createElement("BUTTON")
         const cartIcon = document.createElement('img')
         cartIcon.src = 'images/shopping-cart-black-shape.png'
 
         cartIcon.setAttribute('id', this.id)
         cartIcon.setAttribute('class', 'cart-button')
-        // cartIcon.innerText = "Cart"
+
         cartDiv.appendChild(cartIcon)
         cartIcon.addEventListener("click", this.fetchCart.bind(this));
     }
@@ -86,7 +85,10 @@ class Cart {
     }//end of render cart
 
     addItemToCart(){
-        //"this" is item from item.js
+        //this is the item
+        newCart.items.push(this)
+        newCart.renderCart()
+
         const options = {
             method: "PATCH",
             headers: {
@@ -97,7 +99,7 @@ class Cart {
         }
         return fetch(`http://localhost:3000/items/${this.id}`, options)
         .then(r => r.json())
-        .then(r => {console.log(r)})
+        // .then(r => {console.log(r)})
         .then(r => {
             newCart.fetchCart()
         })
