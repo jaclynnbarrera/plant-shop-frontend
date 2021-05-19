@@ -11,8 +11,6 @@ class Item {
     }
 
      renderItem() {
-        console.log("we are in renderItem")
-
         const itemsDiv = document.getElementById('itemsContainer')
         // itemsDiv.innerHTML = ""
      

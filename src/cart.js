@@ -76,7 +76,7 @@ class Cart {
             removeItemButton.textContent = "Remove"
             eachItemDiv.appendChild(removeItemButton)
 
-                removeItemButton.addEventListener("click", this.removeItemFromCart.bind(item))//endofeventlistener
+                removeItemButton.addEventListener("click", this.removeItemFromCart.bind(item))
          }//endof loop
 
          const totalPrice = document.createElement('h2')
