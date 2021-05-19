@@ -50,6 +50,14 @@ class Item {
         const itemName = document.createElement('h2')
         itemName.innerText = this.name
         singleItemDiv.appendChild(itemName)
+
+        const itemImage = document.createElement('img')
+        itemImage.src = this.image_link
+        singleItemDiv.appendChild(itemImage)
+
+        const plantCare = document.createElement('h3')
+        plantCare.innerText = "How To Care For Your Plant:"
+        singleItemDiv.appendChild(plantCare)
     
         const itemDescription = document.createElement('p')
         itemDescription.innerText = this.description
@@ -58,15 +66,6 @@ class Item {
         const itemPrice = document.createElement('p')
         itemPrice.innerText = `$${this.price}`
         singleItemDiv.appendChild(itemPrice)
-
-        const itemImage = document.createElement('img')
-        itemImage.src = this.image_link
-        singleItemDiv.appendChild(itemImage)
-
-        const itemCare = document.createElement('p')
-        itemCare.innerText = "Plant Care:"
-        //pull from item attribute and do a for loop
-        singleItemDiv.appendChild(itemCare)
     
         const cartButton = document.createElement("BUTTON");
         cartButton.setAttribute('id', 'add-to-cart')
