@@ -106,7 +106,10 @@ class Cart {
     }//
 
     removeItemFromCart(){
-        //"this is item from item.js"
+        let toRemove = newCart.items.find(item => item.id == this.id)
+        newCart.items.pop(toRemove)
+        newCart.renderCart()
+
         const options = {
             method: "PATCH",
             headers: {
@@ -132,3 +135,4 @@ class Cart {
         })
     }
 }
+
