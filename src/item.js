@@ -1,5 +1,7 @@
+let itemsArr = []
 
 class Item {
+
     
     constructor(item){
         this.name = item.name
@@ -8,9 +10,11 @@ class Item {
         this.id = item.id
         this.cart_id = item.cart_id
         this.image_link = item.image_link
+        itemsArr.push(item)
     }
 
      renderItem() {
+
         const itemsDiv = document.getElementById('itemsContainer')
         // itemsDiv.innerHTML = ""
      
@@ -95,4 +99,25 @@ function fetchItems(){
             items.map(item => new Item(item).renderItem())
     }).catch((err => alert(err)))
 }
+
+function cheapestItem() {
+    const container = document.getElementById("itemsContainer")
+
+    const cheapButton = document.createElement('BUTTON')
+    cheapButton.innerText = "Sale Item"
+    container.appendChild(cheapButton)
+
+    //addtocart
+    cheapButton.addEventListener('click', function(e){
+        e.preventDefault()
+        let item = itemsArr.sort(function(a,b) {
+            return a.price - b.price
+        });
+        let finalItem = item[0]
+        newCart.addItemToCart.call(finalItem)
+    })
+
+}
+
+
 

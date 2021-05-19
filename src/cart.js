@@ -127,12 +127,20 @@ class Cart {
     }
 
     static createNewCart() {
-        return fetch("http://localhost:3000/carts/2")
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({item_count: 0, total_price: 0})
+        }
+        return fetch("http://localhost:3000/carts", options)
         .then(r => r.json())
         .then(cart => {
             newCart = new Cart(cart)
             newCart.createCartButton()
         })
     }
-}
 
+}
