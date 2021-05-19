@@ -14,12 +14,15 @@
 }
 
 .cart-button {
-  float: right;
-  margin-top: 40px;
-  margin-right: 200px;
+  max-width: 7%;
+  max-height: 7%;
   position: absolute;
-  top: 00;
-  right: 00;
+  float: right;
+  top: 0;
+  right: 0;
+  padding-right: 10%;
+  padding-top: 5%;
+
 }
 
 #single-item, #single-item-individ {

@@ -11,17 +11,19 @@ class Cart {
 
     createCartButton(){
         const cartDiv = document.getElementById('cartContainer')
-        const cartIcon = document.createElement("BUTTON")
+        // const cartIcon = document.createElement("BUTTON")
+        const cartIcon = document.createElement('img')
+        cartIcon.src = 'images/shopping-cart-black-shape.png'
+
         cartIcon.setAttribute('id', this.id)
         cartIcon.setAttribute('class', 'cart-button')
-        cartIcon.innerText = "Cart"
+        // cartIcon.innerText = "Cart"
         cartDiv.appendChild(cartIcon)
         cartIcon.addEventListener("click", this.fetchCart.bind(this));
     }
 
     fetchCart(){
-        this
-        fetch(`http://localhost:3000/carts/${this.id}`)
+        return fetch(`http://localhost:3000/carts/${this.id}`)
         .then(resp => resp.json())
         .then(resp => this.renderCart())
     }
@@ -75,13 +77,7 @@ class Cart {
             removeItemButton.textContent = "Remove"
             eachItemDiv.appendChild(removeItemButton)
 
-                // removeItemButton.addEventListener("click", function(e){
-                //     e.preventDefault()
-                //     eachItemDiv.innerHTML = ""
-                //     let cartId = items[0].cart_id
-                //     let itemId = item.id
-                //     this.removeItemFromCart(itemId)
-                // })//endofeventlistener
+                removeItemButton.addEventListener("click", this.removeItemFromCart.bind(item))//endofeventlistener
          }//endof loop
 
          const totalPrice = document.createElement('h2')
@@ -90,6 +86,7 @@ class Cart {
     }//end of render cart
 
     addItemToCart(){
+        //"this" is item from item.js
         const options = {
             method: "PATCH",
             headers: {
@@ -98,13 +95,31 @@ class Cart {
             },
             body: JSON.stringify({cart_id: newCart.id})
         }
-        fetch(`http://localhost:3000/items/${this.id}`, options)
+        return fetch(`http://localhost:3000/items/${this.id}`, options)
         .then(r => r.json())
         .then(r => {console.log(r)})
         .then(r => {
             newCart.fetchCart()
         })
     }//
+
+    removeItemFromCart(){
+        //"this is item from item.js"
+        const options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({cart_id: 1})
+        }
+        return fetch(`http://localhost:3000/items/${this.id}`, options)
+        .then(r => r.json())
+        // .then(r => {console.log(r)})
+        .then(r => {
+            newCart.fetchCart()
+        })
+    }
 
     static createNewCart() {
         return fetch("http://localhost:3000/carts/2")
@@ -114,4 +129,4 @@ class Cart {
             newCart.createCartButton()
         })
     }
-}//endofcartclass
+}
