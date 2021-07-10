@@ -23,12 +23,11 @@ class Cart {
 
     fetchCart(){
         return fetch(`http://localhost:3000/carts/${this.id}`)
-        .then(resp => resp.json())
-        .then(resp => this.renderCart(resp))
+        .then(r => r.json())
+        .then(r => this.renderCart())
     }
 
     renderCart(){
-
         let totalPriceArr = []
     
         const itemsDiv = document.getElementById('itemsContainer')
@@ -84,7 +83,7 @@ class Cart {
          cart.appendChild(totalPrice)
     }//end of render cart
 
-    addItemToCart(){
+    addItemToCart(){ 
         //this is the item
         newCart.items.push(this)
         newCart.renderCart()
@@ -99,7 +98,6 @@ class Cart {
         }
         return fetch(`http://localhost:3000/items/${this.id}`, options)
         .then(r => r.json())
-        // .then(r => {console.log(r)})
         .then(r => {
             newCart.fetchCart()
         })
