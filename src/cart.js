@@ -21,7 +21,7 @@ class Cart {
   }
 
   fetchCart() {
-    return fetch(`https://sheltered-bayou-98847.herokuapp.com/carts${this.id}`)
+    return fetch(`https://sheltered-bayou-98847.herokuapp.com/carts/${this.id}`)
       .then((r) => r.json())
       .then((r) => this.renderCart());
   }
