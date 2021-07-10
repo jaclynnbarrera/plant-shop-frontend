@@ -91,7 +91,7 @@ class Item {
 
 //set up API class?
 function fetchItems() {
-  fetch("http://localhost:3000/items")
+  fetch("https://sheltered-bayou-98847.herokuapp.com/items")
     .then((r) => r.json())
     .then((items) => {
       items.map((item) => new Item(item).renderItem());
@@ -99,21 +99,20 @@ function fetchItems() {
     .catch((err) => alert(err));
 }
 
-// function cheapestItem() {
-//     const container = document.getElementById("itemsContainer")
+// function saleItem() {
+//   const container = document.getElementById("itemsContainer");
 
-//     const cheapButton = document.createElement('BUTTON')
-//     cheapButton.innerText = "Sale Item"
-//     container.appendChild(cheapButton)
+//   const saleButton = document.createElement("BUTTON");
+//   saleButton.innerText = "Sale Item";
+//   container.appendChild(saleButton);
 
-//     //addtocart
-//     cheapButton.addEventListener('click', function(e){
-//         e.preventDefault()
-//         let item = itemsArr.sort(function(a,b) {
-//             return a.price - b.price
-//         });
-//         let finalItem = item[0]
-//         newCart.addItemToCart.call(finalItem)
-//     })
-
+//   //addtocart
+//   saleButton.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     let item = itemsArr.sort(function (a, b) {
+//       return a.price - b.price;
+//     });
+//     let finalItem = item[0];
+//     newCart.addItemToCart.call(finalItem);
+//   });
 // }
