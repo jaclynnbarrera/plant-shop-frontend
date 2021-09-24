@@ -99,6 +99,14 @@ function fetchItems() {
     .catch((err) => alert(err));
 }
 
+let url = "http://api.open-notify.org/astro";
+
+fetch(url)
+  .then((r) => r.json())
+  .then((data) => console.log(data.people))
+  .then((p) => console.log(p))
+  .catch((e) => console.log(e));
+
 // function saleItem() {
 //   const container = document.getElementById("itemsContainer");
 

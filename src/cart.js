@@ -100,6 +100,7 @@ class Cart {
       },
       body: JSON.stringify({ cart_id: newCart.id }),
     };
+
     return fetch(
       `https://sheltered-bayou-98847.herokuapp.com/items/${this.id}`,
       options
@@ -123,17 +124,14 @@ class Cart {
       },
       body: JSON.stringify({ cart_id: 1 }),
     };
-    return (
-      fetch(
-        `https://sheltered-bayou-98847.herokuapp.com/items/${this.id}`,
-        options
-      )
-        .then((r) => r.json())
-        // .then(r => {console.log(r)})
-        .then((r) => {
-          newCart.fetchCart();
-        })
-    );
+    return fetch(
+      `https://sheltered-bayou-98847.herokuapp.com/items/${this.id}`,
+      options
+    )
+      .then((r) => r.json())
+      .then((r) => {
+        newCart.fetchCart();
+      });
   }
 
   static createNewCart() {
@@ -145,6 +143,7 @@ class Cart {
       },
       body: JSON.stringify({ item_count: 0, total_price: 0 }),
     };
+
     return fetch("https://sheltered-bayou-98847.herokuapp.com/carts", options)
       .then((r) => r.json())
       .then((cart) => {
