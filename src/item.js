@@ -106,21 +106,3 @@ fetch(url)
   .then((data) => console.log(data.people))
   .then((p) => console.log(p))
   .catch((e) => console.log(e));
-
-// function saleItem() {
-//   const container = document.getElementById("itemsContainer");
-
-//   const saleButton = document.createElement("BUTTON");
-//   saleButton.innerText = "Sale Item";
-//   container.appendChild(saleButton);
-
-//   //addtocart
-//   saleButton.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     let item = itemsArr.sort(function (a, b) {
-//       return a.price - b.price;
-//     });
-//     let finalItem = item[0];
-//     newCart.addItemToCart.call(finalItem);
-//   });
-// }
