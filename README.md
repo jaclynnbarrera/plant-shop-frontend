@@ -7,7 +7,7 @@ The Plant Shop is an e-commerce single page application, where users can shop fo
 ### Installation
 1. Fork and clone repo to your local machine. 
 2. Run `bundle install` to install dependencies.
-3. Here is the link to the frontend repo: https://github.com/jaclynnbarrera/plant-shop-backend
+3. Here is the link to the backend repo: https://github.com/jaclynnbarrera/plant-shop-backend
 
 ### Usage
 1. Run `rails db:migrate`
